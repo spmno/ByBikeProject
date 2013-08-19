@@ -1,0 +1,52 @@
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/bybikebackground"
+    tools:context=".MainActivity"
+    android:clickable="false">
+
+    <TextView
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/maxSpeedValueTextView"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_x="32dp"
+            android:layout_y="185dp"/>
+
+    <TextView
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/timeValueTextView"
+            android:layout_gravity="right|bottom"
+            android:layout_x="32dp"
+            android:layout_y="389dp"/>
+
+    <Button
+            android:layout_width="272dp"
+            android:layout_height="48dp"
+            android:text="@string/start"
+            android:id="@+id/startStopbutton"
+            android:layout_marginBottom="18dp"
+            android:layout_gravity="center"
+            android:layout_x="38dp"
+            android:layout_y="472dp"
+            android:background="#646464"/>
+
+    <TextView
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/speedValueTextView"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_x="43dp"
+            android:layout_y="86dp"/>
+
+</AbsoluteLayout>
