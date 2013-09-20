@@ -3,6 +3,8 @@ package com.spmno.bybike;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
+import android.location.GpsSatellite;
+import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -24,9 +26,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Iterator;
 
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener, GpsStatus.Listener {
 
     private float maxSpeed = 0;
     private Timer timer = new Timer();
@@ -82,6 +85,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             String mentionInfo = getResources().getString(R.string.gps_work);
             Toast.makeText(this, mentionInfo, Toast.LENGTH_SHORT)
                     .show();
+            locationManager.addGpsStatusListener(this);
             return;
         }
 
@@ -186,6 +190,40 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     button.setText(R.string.stop);
                     isStart = true;
                 }
+            }
+        }
+    }
+
+    @Override
+    public void onGpsStatusChanged(int event) {
+        switch (event) {
+            case GpsStatus.GPS_EVENT_SATELLITE_STATUS: {
+
+                break;
+            }
+            case GpsStatus.GPS_EVENT_FIRST_FIX: {
+                break;
+            }
+            case GpsStatus.GPS_EVENT_STARTED: {
+                //Log.i(TAG, "卫星状态改变");
+                //获取当前状态
+                LocationManager locationManager = (LocationManager) this
+                        .getSystemService(Context.LOCATION_SERVICE);
+                GpsStatus gpsStatus=locationManager.getGpsStatus(null);
+                //获取卫星颗数的默认最大值
+                int maxSatellites = gpsStatus.getMaxSatellites();
+                //创建一个迭代器保存所有卫星
+                Iterator<GpsSatellite> iters = gpsStatus.getSatellites().iterator();
+                int count = 0;
+                while (iters.hasNext() && count <= maxSatellites) {
+                    GpsSatellite s = iters.next();
+                    count++;
+                }
+                System.out.println("搜索到："+count+"颗卫星");
+                break;
+            }
+            case GpsStatus.GPS_EVENT_STOPPED: {
+                break;
             }
         }
     }
